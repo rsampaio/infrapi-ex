@@ -1,0 +1,29 @@
+image: "alpine:latest"
+services:
+  - "postgres:latest"
+
+variables:
+  POSTGRES_DB: infrapi_test
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: ""
+  MIX_ENV: test
+
+before_script:
+  - apk update && \
+    apk add elixir erlang-ssl erlang-erts erlang-syntax-tools erlang-tools erlang-erl-interface erlang-public-key erlang-crypto erlang-parsetools erlang-dev gettext-dev musl-dev gcc make grep postgresql-client
+  - cp config/test.exs.ci config/test.exs
+  - mix deps.get
+  - mix ecto.create
+  - mix ecto.migrate
+
+stages:
+  - test
+
+job:
+  stage: test
+  script:
+    - mix test
+  cache:
+    paths:
+      - "_build"
+      - "deps"
