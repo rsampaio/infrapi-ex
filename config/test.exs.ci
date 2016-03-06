@@ -15,5 +15,5 @@ config :infrapi, Infrapi.Repo,
   username: "postgres",
   password: "",
   database: "infrapi_test",
-  hostname: "localhost",
+  hostname: "postgres",
   pool: Ecto.Adapters.SQL.Sandbox
