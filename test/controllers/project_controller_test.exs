@@ -8,7 +8,7 @@ defmodule Infrapi.ProjectControllerTest do
 
   setup %{conn: conn} do
     user = Repo.insert! %User{}
-    {:ok, jwt, full_claims } = Guardian.encode_and_sign(user, :api)
+    {:ok, jwt, _full_claims } = Guardian.encode_and_sign(user, :api)
     conn = put_req_header(conn, "authorization", jwt)
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
