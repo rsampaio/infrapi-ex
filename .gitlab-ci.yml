@@ -1,6 +1,6 @@
 image: "alpine:latest"
 services:
-  - "postgres:latest"
+  - "postgres"
 
 variables:
   POSTGRES_DB: infrapi_test
@@ -10,7 +10,7 @@ variables:
 
 before_script:
   - apk update && \
-    apk add elixir erlang-ssl erlang-erts erlang-syntax-tools erlang-tools erlang-erl-interface erlang-public-key erlang-crypto erlang-parsetools erlang-dev gettext-dev musl-dev gcc make grep postgresql-client
+    apk add elixir erlang-ssl erlang-erts erlang-syntax-tools erlang-tools erlang-erl-interface erlang-public-key erlang-crypto erlang-parsetools erlang-dev gettext-dev musl-dev gcc make grep postgresql-client bash
   - cp config/test.exs.ci config/test.exs
   - mix deps.get
   - mix ecto.create
