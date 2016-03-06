@@ -13,8 +13,8 @@ before_script:
   - mix local.hex --force
   - mix local.rebar --force
   - mix deps.clean --all
-  - mix deps.get
-  - mix ecto.create
+  - mix deps.get >/dev/null
+  - mix ecto.create >/dev/null
   - mix ecto.migrate
 
 stages:
