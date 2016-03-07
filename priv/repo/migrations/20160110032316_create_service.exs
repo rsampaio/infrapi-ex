@@ -5,7 +5,7 @@ defmodule Infrapi.Repo.Migrations.CreateService do
     create table(:services) do
       add :name, :string
       add :image, :string
-      add :env, :string
+      add :env, {:array, :string}
       add :ports, {:array, :string}
       add :project_id, references(:projects, on_delete: :nothing)
       add :link_id, references(:services, on_delete: :nothing)

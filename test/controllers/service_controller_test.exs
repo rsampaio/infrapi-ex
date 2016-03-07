@@ -4,7 +4,7 @@ defmodule Infrapi.ServiceControllerTest do
   alias Infrapi.Service
   alias Infrapi.Project
   alias Infrapi.User
-  @valid_attrs %{name: "service", image: "image", volumes: [%{path: "/test"}]}
+  @valid_attrs %{name: "service", image: "image", env: ["A=1"], volumes: [%{path: "/test"}]}
   @invalid_attrs %{}
 
   setup %{conn: conn} do
@@ -25,7 +25,7 @@ defmodule Infrapi.ServiceControllerTest do
     service = Repo.insert! %Service{project_id: project.id}
     conn = get conn, project_service_path(conn, :show, project, service)
     assert json_response(conn, 200)["data"] == %{"id" => service.id,
-      "name" => service.name, "env" => nil, "volumes" => [], "ports" => [],
+      "name" => service.name, "env" => [], "volumes" => [], "ports" => [],
       "image" => nil, "project_id" => service.project_id}
   end
 

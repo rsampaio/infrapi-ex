@@ -8,7 +8,7 @@ defmodule Infrapi.Service do
     # This should be a mapping from docker-compose.yml
     # at least what I need for now
     field :image, :string
-    field :env, :string
+    field :env, {:array, :string}
     field :ports, {:array, :string}
 
     has_many :links,   Infrapi.Service
@@ -20,7 +20,7 @@ defmodule Infrapi.Service do
   end
 
   @required_fields ~w(name image ports project_id)
-  @optional_fields ~w()
+  @optional_fields ~w(env)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
